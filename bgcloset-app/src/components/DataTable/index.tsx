@@ -4,7 +4,6 @@ import * as S from "./styles";
 export interface Column<T> {
   key: keyof T | "actions";
   label: string;
-
   render?: (value: unknown, row: T) => ReactNode;
 }
 
@@ -13,7 +12,7 @@ interface DataTableProps<T> {
   data: T[];
 }
 
-export function DataTable<T extends Record<string, unknown>>({
+export function DataTable<T extends object>({
   columns,
   data,
 }: DataTableProps<T>) {
@@ -35,6 +34,7 @@ export function DataTable<T extends Record<string, unknown>>({
             ))}
           </tr>
         </thead>
+
         <tbody>
           {data.map((row, rowIndex) => (
             <S.Tr key={rowIndex}>
