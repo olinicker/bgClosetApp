@@ -3,7 +3,7 @@ import { DefaultLayout } from "../components/DefaultLayout";
 import { Produtos } from "../pages/Products";
 import { Dashboard } from "../pages/Dashboard";
 import { Clientes } from "../pages/Customers";
-const Vendas = () => <h1>PDV: Nova Venda</h1>;
+import { Vendas } from "../pages/Sales";
 
 export function Router() {
   return (
