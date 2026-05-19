@@ -1,20 +1,14 @@
 import api from "./api";
 
-export interface Produto {
-  id: number;
-  nome: string;
-  categoria?: string;
-  preco_venda: number;
-  estoque_atual: number;
-  sku?: string;
-}
-
-export type CriarProdutoDTO = Omit<Produto, "id">;
+import { type IProduct } from "../interfaces/Product";
+import { productsMock } from "../mocks/productsMock";
+export type CriarProdutoDTO = Omit<IProduct, "id">;
+export type AtualizarProdutoDTO = Partial<CriarProdutoDTO>;
 
 export const productService = {
-  getAll: async (): Promise<Produto[]> => {
+  getAll: async (): Promise<IProduct[]> => {
     try {
-      const response = await api.get<Produto[]>("/produtos");
+      const response = await api.get<IProduct[]>("/produtos");
       return response.data;
     } catch (error) {
       console.warn(
@@ -22,35 +16,26 @@ export const productService = {
         error,
       );
 
-      return [
-        {
-          id: 1,
-          nome: "Camisa Polo B&G",
-          preco_venda: 89.9,
-          estoque_atual: 15,
-          sku: "CAM-POL-001",
-        },
-        {
-          id: 2,
-          nome: "Calça Jeans Premium",
-          preco_venda: 149.9,
-          estoque_atual: 8,
-          sku: "CAL-JNS-002",
-        },
-        {
-          id: 3,
-          nome: "Perfume Essência Dourada",
-          preco_venda: 199.5,
-          estoque_atual: 5,
-          sku: "PER-ESS-003",
-        },
-      ];
+      return productsMock;
     }
   },
 
-  create: async (produtoData: CriarProdutoDTO): Promise<Produto> => {
+  update: async (
+    id: number,
+    produtoData: AtualizarProdutoDTO,
+  ): Promise<IProduct> => {
     try {
-      const response = await api.post<Produto>("/produtos", produtoData);
+      const response = await api.put<IProduct>(`/produtos/${id}`, produtoData);
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao atualizar produto com ID ${id}`, error);
+      throw error;
+    }
+  },
+
+  create: async (produtoData: CriarProdutoDTO): Promise<IProduct> => {
+    try {
+      const response = await api.post<IProduct>("/produtos", produtoData);
       return response.data;
     } catch (error) {
       console.error("Erro ao criar produto", error);

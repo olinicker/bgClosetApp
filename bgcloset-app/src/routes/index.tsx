@@ -1,9 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { DefaultLayout } from "../components/DefaultLayout";
 import { Produtos } from "../pages/Products";
-
-const Dashboard = () => <h1>Dashboard: Gráficos em breve</h1>;
-const Clientes = () => <h1>Gestão de Clientes</h1>;
+import { Dashboard } from "../pages/Dashboard";
+import { Clientes } from "../pages/Customers";
 const Vendas = () => <h1>PDV: Nova Venda</h1>;
 
 export function Router() {
