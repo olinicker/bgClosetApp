@@ -4,7 +4,7 @@ import * as S from "./styles";
 export interface Column<T> {
   key: keyof T | "actions";
   label: string;
-  // Trocamos 'any' por 'unknown'
+
   render?: (value: unknown, row: T) => ReactNode;
 }
 
