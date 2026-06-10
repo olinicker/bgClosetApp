@@ -293,6 +293,7 @@ export function Clientes() {
                       <tr style={{ borderBottom: "2px solid #e2e8f0", color: "#64748b" }}>
                         <th style={{ padding: "0.5rem 0" }}>Pedido</th>
                         <th style={{ padding: "0.5rem 0" }}>Data</th>
+                        <th style={{ padding: "0.5rem 0" }}>Status</th>
                         <th style={{ padding: "0.5rem 0" }}>Pagamento</th>
                         <th style={{ padding: "0.5rem 0", textAlign: "right" }}>Valor</th>
                       </tr>
@@ -300,18 +301,47 @@ export function Clientes() {
                     <tbody>
                       {todasAsVendas
                         .filter((v) => v.cliente_id === clienteSelecionado.id)
-                        .map((venda) => (
-                          <tr key={venda.id} style={{ borderBottom: "1px solid #f1f5f9", color: "#334155" }}>
-                            <td style={{ padding: "0.5rem 0" }}>#{venda.id}</td>
-                            <td style={{ padding: "0.5rem 0" }}>
-                              {String(venda.data_venda).split("-").reverse().join("/")}
-                            </td>
-                            <td style={{ padding: "0.5rem 0" }}>{venda.metodo_pagamento}</td>
-                            <td style={{ padding: "0.5rem 0", textAlign: "right", fontWeight: 600 }}>
-                              R$ {Number(venda.valor_total).toFixed(2).replace(".", ",")}
-                            </td>
-                          </tr>
-                        ))}
+                        .map((venda) => {
+                          const isCancelada = venda.status === "cancelada";
+                          const isConsignada = venda.status === "consignada";
+                          return (
+                            <tr 
+                              key={venda.id} 
+                              style={{ 
+                                borderBottom: "1px solid #f1f5f9", 
+                                color: isCancelada ? "#94a3b8" : "#334155" 
+                              }}
+                            >
+                              <td style={{ padding: "0.5rem 0", textDecoration: isCancelada ? "line-through" : "none" }}>
+                                #{venda.id}
+                              </td>
+                              <td style={{ padding: "0.5rem 0", textDecoration: isCancelada ? "line-through" : "none" }}>
+                                {String(venda.data_venda).split("-").reverse().join("/")}
+                              </td>
+                              <td style={{ padding: "0.5rem 0" }}>
+                                {isCancelada ? (
+                                  <span style={{ color: "#ef4444", fontWeight: 600, display: "inline-block" }}>
+                                    Cancelada
+                                  </span>
+                                ) : isConsignada ? (
+                                  <span style={{ color: "#f97316", fontWeight: 600, display: "inline-block" }}>
+                                    Consignada
+                                  </span>
+                                ) : (
+                                  <span style={{ color: "#10b981", fontWeight: 600, display: "inline-block" }}>
+                                    Concluída
+                                  </span>
+                                )}
+                              </td>
+                              <td style={{ padding: "0.5rem 0", textDecoration: isCancelada ? "line-through" : "none" }}>
+                                {venda.metodo_pagamento}
+                              </td>
+                              <td style={{ padding: "0.5rem 0", textAlign: "right", fontWeight: 600, textDecoration: isCancelada ? "line-through" : "none" }}>
+                                R$ {Number(venda.valor_total).toFixed(2).replace(".", ",")}
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
