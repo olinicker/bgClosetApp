@@ -27,6 +27,21 @@ def criar_categorias_padrao():
         print("Categoria 'Saída' já existe.")
 
     db.commit()
+
+    # Sementes de categorias de produtos
+    categorias_prod = ["Vestuário", "Calçados", "Acessórios", "Moda Íntima"]
+    for nome in categorias_prod:
+        cat_existente = db.query(models.CategoriaProduto).filter(
+            models.CategoriaProduto.nome == nome
+        ).first()
+        if not cat_existente:
+            cat = models.CategoriaProduto(nome=nome)
+            db.add(cat)
+            print(f"Categoria de produto '{nome}' criada com sucesso!")
+        else:
+            print(f"Categoria de produto '{nome}' já existe.")
+
+    db.commit()
     db.close()
     print("Processo concluído.")
 

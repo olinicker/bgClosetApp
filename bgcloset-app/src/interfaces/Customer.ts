@@ -1,7 +1,8 @@
 export interface ICustomer {
-  id: number;
+  id?: number;
   nome: string;
-  telefone?: string;
-  email?: string;
-  cpf?: string;
+  telefone?: string | null;
+  email?: string | null;
+  cpf?: string | null;
+  saldo_devedor?: number;
 }

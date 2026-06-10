@@ -1,8 +1,9 @@
 export interface IProduct {
-  id: number;
+  id?: number;
   nome: string;
-  categoria?: string;
+  categoria: string;
+  valor_custo: number;
   preco_venda: number;
   estoque_atual: number;
-  sku?: string;
+  sku?: string | null;
 }

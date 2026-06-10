@@ -22,3 +22,12 @@ def baixar_estoque(db: Session, produto_id: int, quantidade_vendida: int):
         
     produto.estoque_atual -= quantidade_vendida
     
+
+def devolver_estoque(db: Session, produto_id: int, quantidade_devolvida: int):
+    """
+    Devolve a quantidade de produtos ao estoque em caso de devolução ou cancelamento.
+    """
+    produto = db.query(models.Produto).filter(models.Produto.id == produto_id).first()
+    if produto:
+        produto.estoque_atual += quantidade_devolvida
+

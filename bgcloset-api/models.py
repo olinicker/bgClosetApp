@@ -18,6 +18,7 @@ class Cliente(Base):
     telefone = Column(String(20), nullable=True)
     email = Column(String(100), nullable=True)
     cpf = Column(String(20), nullable=True)
+    saldo_devedor = Column(Numeric(10, 2), nullable=False, default=0.00)
     
     vendas = relationship("Venda", back_populates="cliente")
 
@@ -36,6 +37,12 @@ class CategoriaFinanceira(Base):
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String(50), nullable=False)
     tipo = Column(String(20), nullable=False)
+
+class CategoriaProduto(Base):
+    __tablename__ = "categorias_produtos"
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String(100), nullable=False, unique=True)
+
 
 class Venda(Base):
     __tablename__ = "vendas"
@@ -71,3 +78,14 @@ class MovimentacaoFinanceira(Base):
     valor = Column(Numeric(10, 2), nullable=False)
     data_ocorrencia = Column(Date, nullable=False)
     descricao = Column(String(255), nullable=True)
+
+class HistoricoPagamentoDebito(Base):
+    __tablename__ = "historico_pagamentos_debito"
+    id = Column(Integer, primary_key=True, index=True)
+    cliente_id = Column(Integer, ForeignKey("clientes.id", ondelete="CASCADE"), nullable=False)
+    valor_pago = Column(Numeric(10, 2), nullable=False)
+    data_pagamento = Column(Date, nullable=False, default=date.today)
+    metodo_pagamento = Column(String(50), nullable=False)
+    descricao = Column(String(255), nullable=True)
+
+    cliente = relationship("Cliente")

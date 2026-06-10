@@ -19,6 +19,12 @@ class UsuarioBase(BaseModel):
 class UsuarioCreate(UsuarioBase):
     senha: str
 
+class UsuarioUpdate(BaseModel):
+    nome: str
+    email: EmailStr
+    perfil: str = "vendedor"
+    senha: Optional[str] = None
+
 class UsuarioResponse(UsuarioBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
@@ -35,6 +41,21 @@ class ClienteCreate(ClienteBase):
 
 class ClienteResponse(ClienteBase):
     id: int
+    saldo_devedor: float
+    model_config = ConfigDict(from_attributes=True)
+
+class PagamentoDebito(BaseModel):
+    valor_pago: float
+    metodo_pagamento: str
+    descricao: Optional[str] = None
+
+class HistoricoPagamentoDebitoResponse(BaseModel):
+    id: int
+    cliente_id: int
+    valor_pago: float
+    data_pagamento: date
+    metodo_pagamento: str
+    descricao: Optional[str] = None
     model_config = ConfigDict(from_attributes=True)
 
 # ================= PRODUTOS =================
@@ -70,6 +91,15 @@ class VendaCreate(BaseModel):
     usuario_id: int
     metodo_pagamento: str
     itens: List[ItemVendaCreate]
+    status: Optional[str] = "concluida"
+
+class ItemAcerto(BaseModel):
+    produto_id: int
+    quantidade_devolvida: int
+
+class AcertoConsignado(BaseModel):
+    metodo_pagamento: str
+    itens_devolvidos: List[ItemAcerto]
 
 class VendaResponse(BaseModel):
     id: int
@@ -93,6 +123,18 @@ class CategoriaFinanceiraCreate(CategoriaFinanceiraBase):
 class CategoriaFinanceiraResponse(CategoriaFinanceiraBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
+
+# ================= CATEGORIAS DE PRODUTOS =================
+class CategoriaProdutoBase(BaseModel):
+    nome: str
+
+class CategoriaProdutoCreate(CategoriaProdutoBase):
+    pass
+
+class CategoriaProdutoResponse(CategoriaProdutoBase):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
+
 
 # ================= MOVIMENTAÇÃO FINANCEIRA =================
 class MovimentacaoManualCreate(BaseModel):

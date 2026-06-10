@@ -13,6 +13,7 @@ export interface ISale {
   valor_total: number;
   metodo_pagamento: string;
   data_venda: string;
+  status: string;
   itens: ISaleItem[];
 }
 
@@ -21,4 +22,5 @@ export interface CriarSaleDTO {
   usuario_id: number;
   metodo_pagamento: string;
   itens: Omit<ISaleItem, "nome_produto" | "subtotal">[];
+  status?: string;
 }

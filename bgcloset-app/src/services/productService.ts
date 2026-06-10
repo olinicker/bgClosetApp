@@ -1,54 +1,50 @@
 import api from "./api";
-
 import { type IProduct } from "../interfaces/Product";
-import { productsMock } from "../mocks/productsMock";
+
 export type CriarProdutoDTO = Omit<IProduct, "id">;
 export type AtualizarProdutoDTO = Partial<CriarProdutoDTO>;
 
-export const productService = {
-  getAll: async (): Promise<IProduct[]> => {
-    try {
-      const response = await api.get<IProduct[]>("/produtos");
-      return response.data;
-    } catch (error) {
-      console.warn(
-        "Backend não conectado. Retornando dados simulados (mock).",
-        error,
-      );
+export interface IProductCategory {
+  id?: number;
+  nome: string;
+}
 
-      return productsMock;
-    }
+export type CriarCategoriaProdutoDTO = Omit<IProductCategory, "id">;
+
+export const productService = {
+  getAll: async (categoria?: string): Promise<IProduct[]> => {
+    // Retorna os dados reais da API. Se der erro, ele quebra aqui.
+    const response = await api.get<IProduct[]>("/produtos", {
+      params: categoria ? { categoria } : undefined
+    });
+    return response.data;
   },
 
-  update: async (
-    id: number,
-    produtoData: AtualizarProdutoDTO,
-  ): Promise<IProduct> => {
-    try {
-      const response = await api.put<IProduct>(`/produtos/${id}`, produtoData);
-      return response.data;
-    } catch (error) {
-      console.error(`Erro ao atualizar produto com ID ${id}`, error);
-      throw error;
-    }
+  update: async (id: number, produtoData: AtualizarProdutoDTO): Promise<IProduct> => {
+    const response = await api.put<IProduct>(`/produtos/${id}`, produtoData);
+    return response.data;
   },
 
   create: async (produtoData: CriarProdutoDTO): Promise<IProduct> => {
-    try {
-      const response = await api.post<IProduct>("/produtos", produtoData);
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao criar produto", error);
-      throw error;
-    }
+    const response = await api.post<IProduct>("/produtos", produtoData);
+    return response.data;
   },
 
   delete: async (id: number): Promise<void> => {
-    try {
-      await api.delete(`/produtos/${id}`);
-    } catch (error) {
-      console.error("Erro ao excluir produto", error);
-      throw error;
-    }
+    await api.delete(`/produtos/${id}`);
+  },
+
+  getCategories: async (): Promise<IProductCategory[]> => {
+    const response = await api.get<IProductCategory[]>("/produtos/categorias");
+    return response.data;
+  },
+
+  createCategory: async (categoryData: CriarCategoriaProdutoDTO): Promise<IProductCategory> => {
+    const response = await api.post<IProductCategory>("/produtos/categorias", categoryData);
+    return response.data;
+  },
+
+  deleteCategory: async (id: number): Promise<void> => {
+    await api.delete(`/produtos/categorias/${id}`);
   },
 };

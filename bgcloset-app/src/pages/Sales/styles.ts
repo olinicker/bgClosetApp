@@ -137,3 +137,73 @@ export const Select = styled.select`
     border-color: ${(props) => props.theme.colors.primary};
   }
 `;
+
+export const ErrorMessage = styled.span`
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-align: center;
+`;
+
+export const SuccessMessage = styled.span`
+  color: #10b981;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-align: center;
+`;
+
+export const TabContainer = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 2px solid ${(props) => props.theme.colors.border};
+  margin-bottom: 1rem;
+`;
+
+interface TabButtonProps {
+  $isActive: boolean;
+}
+
+export const TabButton = styled.button<TabButtonProps>`
+  background: transparent;
+  border: none;
+  padding: 0.75rem 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${(props) => (props.$isActive ? props.theme.colors.primary : props.theme.colors.textSecondary)};
+  border-bottom: 3px solid ${(props) => (props.$isActive ? props.theme.colors.primary : "transparent")};
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+  }
+`;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  background-color: ${(props) => props.theme.colors.surface};
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme.colors.border};
+  margin-bottom: 1.5rem;
+`;
+
+export const MiniSelect = styled.select`
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid ${(props) => props.theme.colors.border};
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 0.875rem;
+  outline: none;
+  cursor: pointer;
+
+  &:focus {
+    border-color: ${(props) => props.theme.colors.primary};
+  }
+`;

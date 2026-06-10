@@ -74,13 +74,39 @@ export const CardTrend = styled.span<{ $isPositive?: boolean }>`
   width: fit-content;
 `;
 
-export const Section = styled.section`
+export const HeaderRow = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
+`;
 
-  h2 {
-    font-size: 1.25rem;
-    color: ${(props) => props.theme.colors.text};
+export const FilterGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const FilterLabel = styled.label`
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.textSecondary};
+`;
+
+export const Select = styled.select`
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme.colors.border};
+  background-color: ${(props) => props.theme.colors.surface};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 0.95rem;
+  outline: none;
+  cursor: pointer;
+  min-width: 160px;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: ${(props) => props.theme.colors.primary};
   }
 `;

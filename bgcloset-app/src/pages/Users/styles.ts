@@ -6,6 +6,16 @@ export const Container = styled.div`
   gap: 1.5rem;
 `;
 
+export const Section = styled.section`
+  background-color: ${(props) => props.theme.colors.surface};
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
 export const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -22,15 +32,6 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 0.5rem;
   margin-top: 1rem;
-`;
-
-export const FormRow = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  > * {
-    flex: 1;
-  }
 `;
 
 export const FormActions = styled.div`
@@ -61,36 +62,47 @@ export const SuccessMessage = styled.span`
   text-align: center;
 `;
 
-export const DetailCard = styled.div`
-  background-color: ${(props) => props.theme.colors.background};
-  padding: 1.25rem;
+export const Select = styled.select`
+  padding: 0.75rem;
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.colors.border};
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  background-color: ${(props) => props.theme.colors.surface};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+  margin-top: 0.25rem;
 
-  h3 {
-    font-size: 1.1rem;
-    color: ${(props) => props.theme.colors.text};
-    margin: 0 0 0.25rem 0;
-    border-bottom: 1px solid ${(props) => props.theme.colors.border};
-    padding-bottom: 0.5rem;
+  &:focus {
+    border-color: ${(props) => props.theme.colors.primary};
   }
 `;
 
-export const DetailRow = styled.div`
-  display: flex;
-  justify-content: space-between;
+export const Label = styled.label`
   font-size: 0.875rem;
-  
-  strong {
-    color: ${(props) => props.theme.colors.textSecondary};
+  font-weight: 500;
+  color: #1e293b;
+  display: block;
+`;
+
+export const RestrictedContainer = styled.div`
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 3rem auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    color: #ef4444;
+    margin-bottom: 0.5rem;
   }
 
-  span {
-    color: ${(props) => props.theme.colors.text};
-    font-weight: 500;
+  p {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 `;
