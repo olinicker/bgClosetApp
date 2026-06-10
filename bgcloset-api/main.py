@@ -31,6 +31,13 @@ except Exception as e:
 
 app = FastAPI(title="BG Closet API")
 
+@app.get("/")
+def read_root():
+    return {
+        "message": "Bem-vindo à API do BG Closet!",
+        "documentation": "/docs"
+    }
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
