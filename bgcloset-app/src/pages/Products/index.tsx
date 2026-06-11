@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Settings, Plus } from "lucide-react";
 import { DataTable, type Column } from "../../components/DataTable";
 import { Button } from "../../components/Button";
 import { Modal } from "../../components/Modal";
@@ -215,11 +216,18 @@ export function Produtos() {
         <div style={{ display: "flex", gap: "1rem" }}>
           {isAdmin && (
             <>
-              <Button variant="secondary" onClick={() => setIsCategoryModalOpen(true)}>
-                Gerenciar Categorias
+              <Button 
+                variant="secondary" 
+                onClick={() => setIsCategoryModalOpen(true)}
+                style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <Settings size={16} /> Gerenciar Categorias
               </Button>
-              <Button onClick={() => { fecharModal(); setIsModalOpen(true); }}>
-                + Novo Produto
+              <Button 
+                onClick={() => { fecharModal(); setIsModalOpen(true); }}
+                style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <Plus size={16} /> Novo Produto
               </Button>
             </>
           )}
