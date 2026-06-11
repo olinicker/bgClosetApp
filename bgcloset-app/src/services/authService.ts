@@ -19,7 +19,15 @@ export const authService = {
     try {
       const token = localStorage.getItem("@BG_Token");
       if (!token) return null;
-      return JSON.parse(atob(token.split(".")[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      
+      // Verifica se o token está expirado (o payload.exp vem em segundos)
+      if (payload.exp && payload.exp < Date.now() / 1000) {
+        localStorage.removeItem("@BG_Token");
+        return null;
+      }
+      
+      return payload;
     } catch {
       return null;
     }

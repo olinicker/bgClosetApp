@@ -3,12 +3,13 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Sidebar } from "../Sidebar";
 import { Header } from "../Header";
 import * as S from "./styles";
+import { authService } from "../../services/authService";
 
 export function DefaultLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const token = localStorage.getItem("@BG_Token");
+  const usuarioLogado = authService.getUsuarioLogado();
 
-  if (!token) {
+  if (!usuarioLogado) {
     return <Navigate to="/login" replace />;
   }
 
