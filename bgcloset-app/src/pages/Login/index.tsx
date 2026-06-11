@@ -29,7 +29,7 @@ export function Login() {
       
       localStorage.setItem("@BG_Token", data.access_token);
       
-      navigate("/produtos");
+      navigate("/");
       
     } catch (error) {
       // Em vez do alert, salvamos a mensagem no estado para o React renderizar
