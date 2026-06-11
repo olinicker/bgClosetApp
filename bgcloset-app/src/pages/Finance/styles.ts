@@ -40,24 +40,23 @@ export const CardsGrid = styled.div`
   }
 `;
 
-interface CardProps {
-  color?: string;
-}
-
-export const Card = styled.div<CardProps>`
+export const Card = styled.div`
   background-color: ${(props) => props.theme.colors.surface};
   padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
   border: 1px solid ${(props) => props.theme.colors.border};
-  border-left: 4px solid ${(props) => props.color || props.theme.colors.primary};
-  transition: transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-color: ${(props) => props.theme.colors.secondary}50;
   }
 `;
 
@@ -69,18 +68,52 @@ export const CardHeader = styled.div`
   h3 {
     font-size: 0.875rem;
     color: ${(props) => props.theme.colors.textSecondary};
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin: 0;
-  }
-
-  span {
-    font-size: 1.25rem;
   }
 `;
 
+export const IconBox = styled.div<{ $variant: "primary" | "success" | "warning" | "danger" }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  
+  ${({ $variant, theme }) => {
+    switch ($variant) {
+      case "success":
+        return `
+          background-color: ${theme.colors.success}12;
+          color: ${theme.colors.success};
+        `;
+      case "danger":
+        return `
+          background-color: ${theme.colors.danger}12;
+          color: ${theme.colors.danger};
+        `;
+      case "warning":
+        return `
+          background-color: #f59e0b12;
+          color: #d97706;
+        `;
+      default:
+        return `
+          background-color: ${theme.colors.secondary}15;
+          color: ${theme.colors.secondary};
+        `;
+    }
+  }}
+`;
+
 export const CardValue = styled.strong`
-  font-size: 1.75rem;
+  font-size: 1.85rem;
+  font-weight: 700;
   color: ${(props) => props.theme.colors.text};
+  letter-spacing: -0.03em;
 `;
 
 export const Section = styled.section`

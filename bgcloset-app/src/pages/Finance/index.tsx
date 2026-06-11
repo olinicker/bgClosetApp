@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { TrendingUp, TrendingDown, Wallet } from "lucide-react";
 import { DataTable, type Column } from "../../components/DataTable";
 import { Button } from "../../components/Button";
 import { Modal } from "../../components/Modal";
@@ -277,32 +278,38 @@ export function Financas() {
       </S.PageHeader>
 
       <S.CardsGrid>
-        <S.Card color="#10B981">
+        <S.Card>
           <S.CardHeader>
             <h3>Total de Entradas</h3>
-            <span>📈</span>
+            <S.IconBox $variant="success">
+              <TrendingUp size={20} />
+            </S.IconBox>
           </S.CardHeader>
           <S.CardValue style={{ color: "#10B981" }}>
             {formatarMoeda(totalEntradas)}
           </S.CardValue>
         </S.Card>
 
-        <S.Card color="#EF4444">
+        <S.Card>
           <S.CardHeader>
             <h3>Total de Saídas</h3>
-            <span>📉</span>
+            <S.IconBox $variant="danger">
+              <TrendingDown size={20} />
+            </S.IconBox>
           </S.CardHeader>
           <S.CardValue style={{ color: "#EF4444" }}>
             {formatarMoeda(totalSaidas)}
           </S.CardValue>
         </S.Card>
 
-        <S.Card color={saldoCaixa >= 0 ? "#10B981" : "#EF4444"}>
+        <S.Card>
           <S.CardHeader>
             <h3>Saldo em Caixa</h3>
-            <span>💼</span>
+            <S.IconBox $variant={saldoCaixa >= 0 ? "success" : "danger"}>
+              <Wallet size={20} />
+            </S.IconBox>
           </S.CardHeader>
-          <S.CardValue>
+          <S.CardValue style={{ color: saldoCaixa >= 0 ? "#10B981" : "#EF4444" }}>
             {formatarMoeda(saldoCaixa)}
           </S.CardValue>
         </S.Card>

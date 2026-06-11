@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Users, DollarSign } from "lucide-react";
 import { DataTable, type Column } from "../../components/DataTable";
 import { Button } from "../../components/Button";
 import { Modal } from "../../components/Modal";
@@ -191,20 +192,24 @@ export function Crediario() {
       </S.PageHeader>
 
       <S.CardsGrid>
-        <S.Card color="#f59e0b">
+        <S.Card>
           <S.CardHeader>
             <h3>Clientes com Pendências</h3>
-            <span>👤</span>
+            <S.IconBox $variant="warning">
+              <Users size={20} />
+            </S.IconBox>
           </S.CardHeader>
           <S.CardValue style={{ color: "#d97706" }}>
             {devedoresTotais.length}
           </S.CardValue>
         </S.Card>
 
-        <S.Card color="#3b82f6">
+        <S.Card>
           <S.CardHeader>
             <h3>Total a Receber</h3>
-            <span>💰</span>
+            <S.IconBox $variant="primary">
+              <DollarSign size={20} />
+            </S.IconBox>
           </S.CardHeader>
           <S.CardValue style={{ color: "#2563eb" }}>
             {formatarMoeda(totalAReceber)}
