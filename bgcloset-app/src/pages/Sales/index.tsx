@@ -40,6 +40,7 @@ export function Vendas() {
   const [successMsg, setSuccessMsg] = useState("");
   const [itemErrorMsg, setItemErrorMsg] = useState("");
   const [metodoPagamento, setMetodoPagamento] = useState("PIX");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Estados para controle de abas e histórico de vendas
   const [activeTab, setActiveTab] = useState<"pdv" | "historico">("pdv");
@@ -208,6 +209,7 @@ export function Vendas() {
     }
     setErrorMsg("");
     setSuccessMsg("");
+    setIsSubmitting(true);
 
     const novaVenda: CriarSaleDTO = {
       usuario_id: obterIdUsuarioLogado(), 
@@ -241,6 +243,8 @@ export function Vendas() {
       setTimeout(() => {
         setErrorMsg("");
       }, 5000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -519,9 +523,9 @@ export function Vendas() {
                 variant="success"
                 fullWidth
                 onClick={handleFinalizarVenda}
-                disabled={carrinho.length === 0}
+                disabled={carrinho.length === 0 || isSubmitting}
               >
-                FINALIZAR VENDA
+                {isSubmitting ? "PROCESSANDO..." : "FINALIZAR VENDA"}
               </Button>
             </S.CheckoutSection>
           </S.Panel>

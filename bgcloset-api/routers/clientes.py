@@ -43,6 +43,7 @@ def listar_clientes(
     db: Session = Depends(get_db),
     usuario_logado: models.Usuario = Depends(get_usuario_atual)
 ):
+    verificar_consignacoes_expiradas(db)
     clientes = db.query(models.Cliente).all()
     return clientes
 
@@ -52,6 +53,7 @@ def buscar_cliente_por_id(
     db: Session = Depends(get_db),
     usuario_logado: models.Usuario = Depends(get_usuario_atual)
 ):
+    verificar_consignacoes_expiradas(db)
     cliente = db.query(models.Cliente).filter(models.Cliente.id == cliente_id).first()
     if not cliente:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cliente não encontrado.")
