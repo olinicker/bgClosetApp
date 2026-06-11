@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from typing import List, Optional
 from datetime import date
 
@@ -17,13 +17,13 @@ class UsuarioBase(BaseModel):
     perfil: str = "vendedor" # Se não mandar nada, o padrão é ser vendedor
 
 class UsuarioCreate(UsuarioBase):
-    senha: str
+    senha: str = Field(min_length=8, description="Senha do usuário (mínimo 8 caracteres)")
 
 class UsuarioUpdate(BaseModel):
     nome: str
     email: EmailStr
     perfil: str = "vendedor"
-    senha: Optional[str] = None
+    senha: Optional[str] = Field(None, min_length=8, description="Senha do usuário (mínimo 8 caracteres)")
 
 class UsuarioResponse(UsuarioBase):
     id: int

@@ -6,7 +6,7 @@ def baixar_estoque(db: Session, produto_id: int, quantidade_vendida: int):
     """
     Verifica se há estoque suficiente e, se houver, subtrai a quantidade vendida.
     """
-    produto = db.query(models.Produto).filter(models.Produto.id == produto_id).with_for_update().first()
+    produto = db.query(models.Produto).filter(models.Produto.id == produto_id).first()
     
     if not produto:
         raise HTTPException(
@@ -27,7 +27,7 @@ def devolver_estoque(db: Session, produto_id: int, quantidade_devolvida: int):
     """
     Devolve a quantidade de produtos ao estoque em caso de devolução ou cancelamento.
     """
-    produto = db.query(models.Produto).filter(models.Produto.id == produto_id).with_for_update().first()
+    produto = db.query(models.Produto).filter(models.Produto.id == produto_id).first()
     if produto:
         produto.estoque_atual += quantidade_devolvida
 
