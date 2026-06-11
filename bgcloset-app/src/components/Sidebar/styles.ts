@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export const Container = styled.aside`
+export const Container = styled.aside<{ $isOpen?: boolean }>`
   width: 260px;
   background-color: ${(props) => props.theme.colors.primary};
   height: 100vh;
@@ -12,6 +12,15 @@ export const Container = styled.aside`
   box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
   z-index: 10;
   flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: ${(props) => (props.$isOpen ? "translateX(0)" : "translateX(-100%)")};
+  }
 `;
 
 export const LogoWrapper = styled.div`

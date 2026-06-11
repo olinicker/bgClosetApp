@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Menu } from "lucide-react";
 import * as S from "./styles";
 import { authService } from "../../services/authService";
 
-export function Header() {
+interface HeaderProps {
+  onMenuClick: () => void;
+}
+
+export function Header({ onMenuClick }: HeaderProps) {
   const navigate = useNavigate();
-  
+
   // Estado para guardar os dados do utilizador logado
   const [usuario] = useState(() => {
     const payload = authService.getUsuarioLogado();
@@ -22,6 +27,10 @@ export function Header() {
 
   return (
     <S.Container>
+      <S.MenuButton onClick={onMenuClick}>
+        <Menu size={24} />
+      </S.MenuButton>
+
       <S.UserProfile>
         <S.UserInfo>
           <strong>{usuario.nome}</strong>

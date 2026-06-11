@@ -10,10 +10,16 @@ export const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 
   h1 {
     font-size: 1.75rem;
     color: ${(props) => props.theme.colors.text};
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -30,6 +36,11 @@ export const FormRow = styled.div`
 
   > * {
     flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 `;
 
@@ -107,6 +118,11 @@ export const FilterContainer = styled.div`
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.colors.border};
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const FilterLabel = styled.span`
@@ -164,5 +180,14 @@ export const CategoryForm = styled.form`
   margin-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.border};
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    > button {
+      width: 100%;
+    }
+  }
 `;
 
