@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { TrendingUp, TrendingDown, Wallet } from "lucide-react";
+import { TrendingUp, TrendingDown, Wallet, Settings, Plus } from "lucide-react";
 import { DataTable, type Column } from "../../components/DataTable";
 import { Button } from "../../components/Button";
 import { Modal } from "../../components/Modal";
@@ -267,11 +267,18 @@ export function Financas() {
         <h1>Fluxo de Caixa & Finanças</h1>
         {isAdmin && (
           <S.ButtonGroup>
-            <Button variant="secondary" onClick={() => setIsCategoryModalOpen(true)}>
-              ⚙️ Gerenciar Categorias
+            <Button 
+              variant="secondary" 
+              onClick={() => setIsCategoryModalOpen(true)}
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <Settings size={16} /> Gerenciar Categorias
             </Button>
-            <Button onClick={() => setIsModalOpen(true)}>
-              + Registrar Ajuste / Lançamento
+            <Button 
+              onClick={() => setIsModalOpen(true)}
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <Plus size={16} /> Registrar Lançamento
             </Button>
           </S.ButtonGroup>
         )}
