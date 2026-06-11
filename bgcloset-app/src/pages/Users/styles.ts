@@ -20,10 +20,16 @@ export const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 
   h1 {
     font-size: 1.75rem;
     color: ${(props) => props.theme.colors.text};
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -104,5 +110,10 @@ export const RestrictedContainer = styled.div`
     color: #64748b;
     font-size: 1rem;
     margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 576px) {
+    padding: 1.75rem;
+    margin: 1.5rem;
   }
 `;

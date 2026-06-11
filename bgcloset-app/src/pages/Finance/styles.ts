@@ -10,10 +10,17 @@ export const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 
   h1 {
     font-size: 1.75rem;
     color: ${(props) => props.theme.colors.text};
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -105,6 +112,11 @@ export const FormRow = styled.div`
 
   > * {
     flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 `;
 
